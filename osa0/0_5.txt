@@ -1,0 +1,29 @@
+title 0_5
+
+note over selain:
+selain tekee GET kutsut joilla haetaan sivun HTML, CSS ja lopuksi JS
+end note
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: main.css
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+palvelin-->selain: spa.js
+
+
+note over selain:
+spa.js tiedoston koodi 
+
+xhttp.open("GET", "/exampleapp/data.json", true)
+xhttp.send()
+
+hakee data.json palvelimelta, jossa on kaikki luodut notet
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: [{ content: note", date: "2021-03-22" }, ...]
+
+note over selain:
+selain suorittaa spa.js tiedoston xhttp.onreadystatechange() eventin
+joka listaa notet selaimeen
+end note

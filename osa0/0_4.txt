@@ -1,0 +1,38 @@
+title 0_4
+
+note over selain:
+Formin submit inputin painaminen tekee POST kutsun palvelimelle FORM datan note inputin sisällöllä. 
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note over palvelin:
+Palvelin vastaa status koodilla 302 (uudelleenohjauspyyntö) ja kertoo 
+headerilla location: mihin urliin ohjataan uudelleen 
+end note
+palvelin-->selain: 302 location:/exampleapp/notes
+note over selain:
+Selain tekee kutsun /exampleapp/notes urliin josta haetaan uudelleen HTML, CSS ja JS
+end note
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+palvelin-->selain: HTML
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: main.css
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+palvelin-->selain: main.js
+
+note over selain:
+JS koodi hakee data.json palvelimelta, jossa on mukana tehty uusi note ja lisätty päivämäärä
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: [{ content: "uusi note", date: "2021-03-22" }, ...]
+
+note over selain:
+selain suorittaa main.js tiedoston xhttp.onreadystatechange() eventin
+joka listaa notet selaimeen
+end note
+
+note over selain:
+haetaan vielä lopuksi favicon
+end note
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/favicon.ico
+palvelin-->selain: favicon.ico

@@ -1,0 +1,14 @@
+title 0_6
+
+note over selain:
+Formin submit inputin painaminen ottaa notes_form elementin arvon ja nykyisen datetimen sekä 
+muuntaa ne JSON muotoon, 
+listaa notet uudelleen sekä tekee POST kutsun jonka bodyyn laitetaan notesta luotu JSON.
+end note
+selain->palvelin: HTTP POST {content: "note", date: "2021-03-22T11:33:39.960Z"} https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over palvelin:
+Palvelin vastaa status koodilla 201 ja jsonilla joka kertoo,
+että uusi note on luotu. Uudelleenohjausta ei tapahdu. HTML, 
+CSS ja JS tiedostoja ei tarvitse hakea uudelleen.
+end note
+palvelin->selain: 201 {"message":"note created"}
