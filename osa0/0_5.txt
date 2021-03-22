@@ -12,12 +12,7 @@ palvelin-->selain: spa.js
 
 
 note over selain:
-spa.js tiedoston koodi 
-
-xhttp.open("GET", "/exampleapp/data.json", true)
-xhttp.send()
-
-hakee data.json palvelimelta, jossa on kaikki luodut notet
+spa.js tiedoston koodi hakee data.json palvelimelta, jossa on kaikki luodut notet
 end note
 
 selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
