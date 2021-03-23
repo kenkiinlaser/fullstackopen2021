@@ -1,31 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-// props on destruktoroitu muuttujiksi name ja age
-// const { name, age } = props
-const Hello = ({name, age}) => {
-  const bornYear = () => new Date().getFullYear() - age
+const App = (props) => {
+  // counter == variable of the state
+  // setCounter == functio jolla muutetaan tilaa
+  const [counter, setCounter] = useState(0)
 
-  return (
-    <div>
-      <p>
-        Hello {name}, you are {age} years old
-      </p>
-      <p>So you were probably born {bornYear()}</p>
-    </div>
+  setTimeout(
+    () => setCounter(counter + 1),
+    1000
   )
-}
-
-const App = () => {
-
-  const nimi = 'Pekka'
-  const ika = 10
 
   return (
-    <div>
-      <h1>Greetings</h1>
-      <Hello name="Kalle" age={26 + 10}/>
-      <Hello name={nimi} age={ika}/>
-    </div>
+    <div>{counter}</div>
   )
 }
 
