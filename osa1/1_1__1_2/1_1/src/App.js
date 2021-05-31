@@ -2,21 +2,30 @@ import React, { useState } from 'react'
 
 
 const StatisticLine = ({text, value, all}) => {
-  if (text == "positive") {
+
+  if (text === "positive") {
     return(
-      <p>{text}: {(value / all) * 100} %</p>
+      <tr>
+        <th>{text}</th>
+        <th>{(value/all)*100}</th>
+        <th>%</th>
+      </tr>
     )
   }
-  else if (text == "average"){
+  else if (text === "average"){
     return(
-      <p>{text}: {value / all}</p>
+      <tr>
+        <th>{text}</th>
+        <th>{value/all}</th>
+      </tr>
     )
   }
   else {
     return(
-      <div>    
-        <p> {text} {value}</p>
-      </div>
+      <tr>
+        <th>{text}</th>
+        <th>{value}</th>
+      </tr>
     )
   }
 
@@ -25,14 +34,18 @@ const StatisticLine = ({text, value, all}) => {
 const Statistics = ({good, neutral, bad, all ,positive, average}) => {
   if (all > 0){
     return (
-      <div>
+      <table>
+        <thead>
+        </thead>
+        <tbody>
         <StatisticLine text="good" value={good} />
         <StatisticLine text="neutral" value={neutral} />
         <StatisticLine text="bad" value={bad} />
         <StatisticLine text="all" value={all} />
         <StatisticLine text="positive" value={positive} all={all}/>
         <StatisticLine text="average" value={average} all={all}/>
-      </div>
+        </tbody>
+      </table>
     )
   }
   else {
