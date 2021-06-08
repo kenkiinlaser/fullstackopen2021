@@ -18,7 +18,7 @@ const App = () => {
 
   const [newName, setNewName ] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [filterName, setFilterPersons] = useState('Arto Hellas')
+  const [filterName, setFilterPersons] = useState('')
 
 
   useEffect(() => {
@@ -48,18 +48,20 @@ const App = () => {
         }
       )
     } else {
-      window.alert(`${newName} is already added to phonebook`)
+      //window.alert(`${newName} is already added to phonebook`)
+      if(window.confirm(`${newName} is already added to phonebook, replace old one?`)){
+        PersonService
+        .update(persons.filter(person => person.name === newName)[0].id, numberObject).then(
+          PersonService
+          .getAll().then(
+            data => {
+              //console.log(data)
+              setPersons(data)
+            }
+          )
+        )
+      }
     }
-
-
-    /* if we want to prevent duplicate numbers
-    if (persons.filter(person => person.number === newNumber).length < 1){
-      setPersons(persons.concat(numberObject)) 
-    }
-    else {
-      window.alert(`${newNumber} is already added to phonebook`)
-    }
-    */
 
     setNewName('')
     setNewNumber('')

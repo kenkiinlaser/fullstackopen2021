@@ -5,11 +5,12 @@ const Persons = ({persons, filterName, setPersons}) => {
 
     const deleteUser = (id, name) => {
         console.log(id)
+        console.log(name)
         if(window.confirm(`Delete ${name} ${id} ?`)){
             PersonService.deletePerson(
                 id
                 ).then(
-                    () => {
+                    data => {
                         PersonService.getAll().then(data => setPersons(data))
                         window.alert(`Deleted ${name} ${id} !`)
                     }
