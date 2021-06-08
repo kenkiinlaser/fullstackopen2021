@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Persons from './components/Persons.js'
 import Filter from './components/Filter.js'
 import PersonForm from './components/PersonForm.js'
+import PersonService from './services/personservice'
 
-import axios from 'axios'
 
 /*
 Filter
@@ -14,26 +14,22 @@ PersonForm
 const App = () => {
 
   //{ name: 'Arto Hellas', number: '1234' }
-  const [ persons, setPersons] = useState([]) 
+  const [persons, setPersons] = useState([]) 
 
   const [newName, setNewName ] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setFilterPersons] = useState('Arto Hellas')
 
 
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-      })
-  }
-  
-  useEffect(hook, [])
-
-
+  useEffect(() => {
+    PersonService
+      .getAll().then(
+        data => {
+          //console.log(data)
+          setPersons(data)
+        }
+      )
+  }, [])
 
   const addNumber = (event) => {
     event.preventDefault()
@@ -44,11 +40,17 @@ const App = () => {
     }
 
     if(persons.filter(person => person.name === newName).length < 1){
-      setPersons(persons.concat(numberObject)) 
-    } 
-    else {
+      PersonService
+      .create(numberObject).then(
+        data => {
+          console.log(data)
+          setPersons(persons.concat(numberObject)) 
+        }
+      )
+    } else {
       window.alert(`${newName} is already added to phonebook`)
     }
+
 
     /* if we want to prevent duplicate numbers
     if (persons.filter(person => person.number === newNumber).length < 1){
