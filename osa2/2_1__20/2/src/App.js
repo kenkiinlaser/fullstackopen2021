@@ -88,7 +88,7 @@ const App = () => {
       <h2>Add a new number</h2>
       <PersonForm addNumber={addNumber} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <h2>Numbers</h2>
-      <Persons persons={persons} filterName={filterName} />
+      <Persons persons={persons} filterName={filterName} setPersons={setPersons}/>
     </div>
   )
 
